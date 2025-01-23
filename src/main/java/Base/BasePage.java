@@ -332,16 +332,34 @@ public class BasePage {
 	public <T> T handleException(String operation,String locatorValue,Exception e, T defaultValue, boolean failTest)
 	{		
 		String errorMessage= String.format(" [%s] Operation is failed at [%s].Error is [%s]",operation,locatorValue,e.getMessage());
-		test.fail(errorMessage);
+		
 		System.err.print(errorMessage);
 		if(failTest)
 		{
+			test.fail(errorMessage);
 			Assert.fail(errorMessage);
+		}
+		else
+		{
+			test.warning(errorMessage);
 		}
 		
 		return defaultValue;
 		
 		
+	}
+	
+	public boolean isDisplayed(By locator,String locatorValue)
+	{
+		try {
+			WebDriverWait wt= new WebDriverWait(driver,Duration.ofSeconds(timeOut));
+			return wt.until(ExpectedConditions.visibilityOfElementLocated(locator)).isDisplayed();
+			
+		}
+		catch(Exception e)
+		{
+			return handleException("isDisplayed", locatorValue, e, false,false);
+		}
 	}
 	
 	

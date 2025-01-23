@@ -32,6 +32,7 @@ public class SourceStationTest extends TestBase {
 	public void firstTest(String location, String index, long days)
 	{
 
+		try {
 		setTestStep("First Test");
 		DriverContext().navigate().to("https://erail.in");
 		railHomePage rhp= new railHomePage(DriverContext(), testStep());
@@ -48,7 +49,7 @@ public class SourceStationTest extends TestBase {
 		String futureDepartureDate= dop.addDatetoStandardFormat(currentDate, "d-MMM-yy", "days", days);
 		rhp.clickonDepatureDate();
 		rhp.selectDepartureDate(futureDepartureDate);
-		ExcelOperation eop= new ExcelOperation("C:\\Eclipse\\Workspace\\Rapifuzz\\src\\test\\resource\\TestData\\SourceStation.xlsx", "Station");
+		ExcelOperation eop= new ExcelOperation(System.getProperty("user.dir")+"\\src\\test\\resource\\TestData\\SourceStation.xlsx", "Station");
 		List<String> excelList= new ArrayList<>();
 		for(Object[] row : eop.getExcelData())
 		{
@@ -58,7 +59,7 @@ public class SourceStationTest extends TestBase {
 			}
 		}
 		
-		ew.writeToExternalFile("C:\\Eclipse\\Workspace\\Rapifuzz\\src\\test\\resource\\TestData\\RunTimeSourceStation.xlsx", "Stationcompare", compareValue(excelList,sourceStationList));
+		ew.writeToExternalFile(System.getProperty("user.dir")+"\\src\\test\\resource\\TestData\\RunTimeSourceStation.xlsx", "Stationcompare", compareValue(excelList,sourceStationList));
 //		JSONOperation jsop= new JSONOperation();
 //		JSONObject jsondata= jsop.fetchJSONObject("C:\\Eclipse\\Workspace\\Rapifuzz\\src\\test\\resource\\TestData\\InputStation.json", "stations");
 //		
@@ -84,7 +85,11 @@ public class SourceStationTest extends TestBase {
 			getAssert().fail("DropDown Station did not match with Expected Station.Mismatch");
 		}
 		
-		getAssert().assertAll();
+		}
+		finally {
+			getAssert().assertAll();
+		}
+		
 	}
 
 	public List<List<String>> compareValue(List<String> Expected, List<String> Actual)
