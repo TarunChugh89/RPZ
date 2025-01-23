@@ -59,8 +59,9 @@ public class BaseTest {
 	@AfterMethod
 	public void init_Close()
 	{
+		//getAssert().assertAll();
 		DriverContext().quit();
-		getAssert().assertAll();
+		
 	}
 	
 

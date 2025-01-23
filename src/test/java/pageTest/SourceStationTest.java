@@ -84,6 +84,7 @@ public class SourceStationTest extends TestBase {
 			getAssert().fail("DropDown Station did not match with Expected Station.Mismatch");
 		}
 		
+		getAssert().assertAll();
 	}
 
 	public List<List<String>> compareValue(List<String> Expected, List<String> Actual)
