@@ -30,30 +30,16 @@ public class loginPage extends BasePage {
 
 	public boolean isDashBoardDisplayed()
 	{
-		 WebElement ele=getElement(dashboardTitle, "DashBoardTitle");
-		 if(ele!=null)
-		 {
-			 return ele.isDisplayed();
-		 }
-		 else
-		 {
-			 return false;
-		 }
+		return isDisplayed(dashboardTitle, "DashBoard Title");
 			 
 	}
 	
 	public boolean isErrorMessageDisplayed()
 	{	
-		WebElement ele=getElement(errorMessage, "ErrorMesssage");
-		 if(ele!=null)
-		 {
-			 return ele.isDisplayed();
-		 }
-		 else
-		 {
-			 return false;
-		 }
+		return isDisplayed(errorMessage, "ErrorMesssage");
 	}
+	
+	
 }
 
 

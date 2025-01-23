@@ -14,13 +14,14 @@ public class LoginTest extends TestBase {
 	@DataProvider(name="testData")
 	public Object[][] provideTestData()
 	{
-		ExcelOperation eop= new ExcelOperation("C:\\Eclipse\\Workspace\\Rapifuzz\\src\\test\\resource\\TestData\\Login.xlsx", "Credentials");
+		ExcelOperation eop= new ExcelOperation(System.getProperty("user.dir")+"\\src\\test\\resource\\TestData\\Login.xlsx", "Credentials");
 		return eop.getExcelData();
 	}
 	
 	@Test(dataProvider = "testData")
 	public void login(String userName, String password, String isValid)
 	{
+		try {
 		setTestStep("The first test");
 		DriverContext().navigate().to("https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
 		loginPage lp= new loginPage(DriverContext(), testStep());
@@ -34,6 +35,11 @@ public class LoginTest extends TestBase {
 			AssertTrue(lp.isErrorMessageDisplayed(), "ErrorMessage", "Displayed");
 		}
 
+		}
+		finally
+		{
+			getAssert().assertAll();
+		}
 	}
 
 }
