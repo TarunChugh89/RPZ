@@ -18,7 +18,7 @@ public class loginPage extends BasePage {
 	By userName=By.xpath("//input[@name=\"username\"]");
 	By password= By.xpath("//input[@name=\"password\"]");
 	By submitBtn=By.xpath("//button[@type=\"submit\"]");
-	By dashboardTitle= By.xpath("//h6[text()=\"Dashboards\"]");
+	By dashboardTitle= By.xpath("//h6[text()=\"Dashboard\"]");
 	By errorMessage= By.xpath("//p[text()=\"Invalid credentials\"]");
 	
 	public void submitcreds(String name,String pwd)
